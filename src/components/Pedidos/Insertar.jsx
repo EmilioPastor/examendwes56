@@ -10,6 +10,17 @@ function PedidoInsertar({ repartidores }) {
 
 
 
+            <select name="repartidorId">
+                {
+                    repartidores.map(repartidor =>
+                        <option key={repartidor.id} value={repartidor.id}>
+                            {repartidor.nombre}
+                        </option>
+                    )
+                }
+            </select>
+
+
             <button className="border-2 border-black" >Insertar pedido</button>
         </form>
     );
