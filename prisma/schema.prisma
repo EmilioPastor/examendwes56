@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// RELACION 1 A N DE REPARTIDOR A PEDIDO
+model Repartidor {
+  id       Int      @id @default(autoincrement())
+  nombre   String
+  telefono String
+  pedidos  Pedido[] //ARRAY EN EL 1
+
+  @@map("repartidores")
+}
+
+model Pedido {
+  id                Int         @id @default(autoincrement())
+  fecha_hora        DateTime
+  nombre_cliente    String
+  direccion_cliente String
+  repartidorId      Int? //LLAVE FORANEA EN EL N
+  repartidor        Repartidor? @relation(fields: [repartidorId], references: [id]) //RELACION EN EL N
+  pizzas            Pizza[] //ARRAY DEL N DE PIZZA
+
+  @@map("pedidos")
+}
+
+//  RELACION N A N CON PEDIDO Y PIZZA POR LO QUE SE PONE EL ARRAY EN LOS DOS Y CREA UNA RELACION
+model Pizza {
+  id      Int      @id @default(autoincrement())
+  nombre  String
+  precio  Float
+  pedidos Pedido[] //ARRAY DEL N DE PEDIDO
+
+  @@map("pizzas")
+}
