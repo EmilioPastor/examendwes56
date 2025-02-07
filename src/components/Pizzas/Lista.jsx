@@ -1,12 +1,20 @@
-import { obtenerPizzas } from "@/lib/data";
+import Modal from "@/components/Modal";
+import { obtenerPizzas, obtenerPedidos } from "@/lib/data";
+import PizzaEliminar from "./Eliminar";
+import PizzaModificar from "./Modificar";
+import PizzaInsertar from "./Insertar";
 import Link from "next/link";
 
 export default async function Pizzas() {
     const pizzas = await obtenerPizzas()
-    //console.log(pizzas);
-    return (
-        <div>
+    const pedidos = await obtenerPedidos()
 
+    return (
+
+        <div>
+            <Modal openElement={<p className="inline border-2 border-black">Insertar pizza</p>}>
+                <PizzaInsertar pedidos={pedidos} />
+            </Modal>
 
             {
                 pizzas.map(pizza =>
@@ -19,7 +27,14 @@ export default async function Pizzas() {
                         </div>
 
 
+                        <Modal openElement={<p className="inline border-2 border-black">Modificar</p>}>
+                            <PizzaModificar pizza={pizza} pedidos={pedidos} />
+                        </Modal>
 
+
+                        <Modal openElement={<p className="inline border-2 border-black">Eliminar</p>}>
+                            <PizzaEliminar pizza={pizza} />
+                        </Modal>
 
                         <hr />
                     </div>

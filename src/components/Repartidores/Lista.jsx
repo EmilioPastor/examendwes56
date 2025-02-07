@@ -1,6 +1,9 @@
 import { obtenerRepartidores } from "@/lib/data";
+import RepartidorInsertar from "./Insertar";
+import RepartidorModificar from "./Modificar";
+import RepartidorEliminar from "./Eliminar";
 import Link from "next/link";
-
+import Modal from "../Modal";
 
 export default async function Repartidores() {
     const repartidores = await obtenerRepartidores()
@@ -8,6 +11,9 @@ export default async function Repartidores() {
     return (
         <div>
 
+            <Modal openElement={<p className="inline border-2 border-black">Insertar repartidor</p>}>
+                <RepartidorInsertar />
+            </Modal>
 
             {
                 repartidores.map(repartidor =>
@@ -19,9 +25,14 @@ export default async function Repartidores() {
                             <p>{repartidor.telefono}</p>
                         </div>
 
+                        <Modal openElement={<p className="inline border-2 border-black">Modificar</p>}>
+                            <RepartidorModificar repartidor={repartidor} />
+                        </Modal>
 
 
-
+                        <Modal openElement={<p className="inline border-2 border-black">Eliminar</p>}>
+                            <RepartidorEliminar repartidor={repartidor} />
+                        </Modal>
                         <hr />
                     </div>
                 )
