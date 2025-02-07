@@ -89,7 +89,7 @@ export async function eliminarRepartidor(formData) {
 
 
 
-export async function insertarPedido(formData) {
+export async function insertarPedido(prevState,formData) {
     const nombre_cliente = formData.get('nombre_cliente')
     const direccion_cliente = formData.get('direccion_cliente')
     const fecha_hora = new Date(formData.get('fecha_hora'))
@@ -111,13 +111,14 @@ export async function insertarPedido(formData) {
 
 
     revalidatePath('/pedidos')
+    return {success: 'Exito al registrar el pedido'}
 
 
 }
 
 
 
-export async function modificarPedido(formData) {
+export async function modificarPedido(prevState,formData) {
     const id = Number(formData.get('id'))
     const nombre_cliente = formData.get('nombre_cliente')
     const direccion_cliente = formData.get('direccion_cliente')
@@ -142,11 +143,13 @@ export async function modificarPedido(formData) {
 
 
     revalidatePath('/pedidos')
+    return {success: 'Exito al modificar el pedido'}
+
 }
 
 
 
-export async function eliminarPedido(formData) {
+export async function eliminarPedido(prevState,formData) {
     const id = Number(formData.get('id'))
 
 
@@ -158,6 +161,7 @@ export async function eliminarPedido(formData) {
 
 
     revalidatePath('/pedidos')
+    return {success: 'Exito al eliminar el paciente'}
 
 
 }
