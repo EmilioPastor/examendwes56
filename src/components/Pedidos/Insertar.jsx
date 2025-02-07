@@ -9,7 +9,7 @@ function PedidoInsertar({ repartidores }) {
             <input name="direccion_cliente" placeholder="Direccion" />
 
 
-
+            {/* SACAR REPARTIDORES CON EL SELECT */}
             <select name="repartidorId">
                 {
                     repartidores.map(repartidor =>

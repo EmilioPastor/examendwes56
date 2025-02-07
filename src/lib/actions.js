@@ -95,6 +95,7 @@ export async function insertarPedido(formData) {
     const fecha_hora = new Date(formData.get('fecha_hora'))
 
 
+    // SE USA AHORA PARA SACAR EL ID DEL REPARTIDOR
     const repartidorId = Number(formData.get('repartidorId'))
 
 
@@ -103,6 +104,7 @@ export async function insertarPedido(formData) {
             nombre_cliente: nombre_cliente,
             direccion_cliente: direccion_cliente,
             fecha_hora: fecha_hora,
+            // SE USA AHORA PARA SACAR EL ID DEL REPARTIDOR
             repartidorId: repartidorId
         }
     })
@@ -121,7 +123,7 @@ export async function modificarPedido(formData) {
     const direccion_cliente = formData.get('direccion_cliente')
     const fecha_hora = new Date(formData.get('fecha_hora'))
 
-
+    // SE USA AHORA PARA SACAR EL ID DEL REPARTIDOR
     const repartidorId = Number(formData.get('repartidorId'))
 
 
@@ -133,6 +135,7 @@ export async function modificarPedido(formData) {
             nombre_cliente: nombre_cliente,
             direccion_cliente: direccion_cliente,
             fecha_hora: fecha_hora,
+            // SE USA AHORA PARA SACAR EL ID DEL REPARTIDOR
             repartidorId: repartidorId
         }
     })
@@ -165,7 +168,7 @@ export async function eliminarPedido(formData) {
 
 export async function insertarPizza(formData) {
     const nombre = formData.get('nombre')
-    const precio = formData.get('precio')
+    const precio = parseFloat(formData.get('precio')); 
 
     await prisma.pizza.create({
         data: {
@@ -185,8 +188,8 @@ export async function insertarPizza(formData) {
 export async function modificarPizza(formData) {
     const id = Number(formData.get('id'))
     const nombre = formData.get('nombre')
-    const precio = formData.get('precio')
-    
+    const precio = parseFloat(formData.get('precio')); 
+
     await prisma.pizza.update({
         where: {
             id: id
